@@ -1,0 +1,42 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+    .error-container {
+        min-height: 70vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .error-code {
+        font-size: 6rem;
+        font-weight: 700;
+        color: #dc3545;
+    }
+
+    .error-text {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .error-btn {
+        padding: 0.6rem 1.5rem;
+        border-radius: 6px;
+        background-color: #000;
+        color: white;
+        text-decoration: none;
+        transition: 0.2s ease;
+    }
+
+    .error-btn:hover {
+        background-color: #333;
+    }
+</style>
+
+<div class="error-container">
+    <div class="error-code">404</div>
+    <div class="error-text">Oops! The page you’re looking for does not exist.</div>
+    <a href="/listings" class="error-btn">Back to Listings</a>
+</div>

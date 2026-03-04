@@ -1,0 +1,50 @@
+<% layout("/layouts/boilerplate") %>
+
+<style>
+    .error-container {
+        min-height: 70vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    .error-code {
+        font-size: 6rem;
+        font-weight: 700;
+        color: #fd7e14;
+    }
+
+    .error-text {
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+    }
+
+    .error-desc {
+        color: #6c757d;
+        margin-bottom: 1.5rem;
+    }
+
+    .error-btn {
+        padding: 0.6rem 1.5rem;
+        border-radius: 6px;
+        background-color: #000;
+        color: white;
+        text-decoration: none;
+        transition: 0.2s ease;
+    }
+
+    .error-btn:hover {
+        background-color: #333;
+    }
+</style>
+
+<div class="error-container">
+    <div class="error-code">400</div>
+    <div class="error-text">Bad Request</div>
+    <div class="error-desc">
+        The request could not be processed. Please check your input and try again.
+    </div>
+    <a href="/listings" class="error-btn">Back to Listings</a>
+</div>

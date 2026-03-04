@@ -1,0 +1,100 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8 col-lg-6">
+
+            <div class="card shadow-sm border-0 rounded-4">
+                <div class="card-body p-4">
+
+                    <h3 class="text-center mb-4">Edit Your Listing</h3>
+
+                    <form method="POST" action="/listings/<%= listing._id %>?_method=PUT">
+
+                        <!-- Title -->
+                        <div class="mb-3">
+                            <label class="form-label">Title</label>
+                            <input
+                                name="listing[title]"
+                                value="<%= listing.title %>"
+                                type="text"
+                                class="form-control"
+                                required
+                            >
+                        </div>
+
+                        <!-- Description -->
+                        <div class="mb-3">
+                            <label class="form-label">Description</label>
+                            <textarea
+                                name="listing[description]"
+                                class="form-control"
+                                rows="4"
+                            ><%= listing.description %></textarea>
+                        </div>
+
+                        <!-- Image URL -->
+                        <div class="mb-3">
+                            <label class="form-label">Image URL</label>
+                            <input
+                                name="listing[image][url]"
+                                value="<%= listing.image.url %>"
+                                type="text"
+                                class="form-control"
+                            >
+                        </div>
+
+                        <!-- Country -->
+                        <div class="mb-3">
+                            <label class="form-label">Country</label>
+                            <input
+                                name="listing[country]"
+                                value="<%= listing.country %>"
+                                type="text"
+                                class="form-control"
+                            >
+                        </div>
+
+                        <!-- Location -->
+                        <div class="mb-3">
+                            <label class="form-label">Location</label>
+                            <input
+                                name="listing[location]"
+                                value="<%= listing.location %>"
+                                type="text"
+                                class="form-control"
+                            >
+                        </div>
+
+                        <!-- Price -->
+                        <div class="mb-4">
+                            <label class="form-label">Price (₹ / night)</label>
+                            <input
+                                name="listing[price]"
+                                value="<%= listing.price %>"
+                                type="number"
+                                class="form-control"
+                            >
+                        </div>
+
+                        <!-- Button -->
+                        <div class="d-grid">
+                            <button class="btn btn-primary rounded-pill">
+                                Save Changes
+                            </button>
+                        </div>
+
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+<!-- this key val pair listing[title] 
+ and al so that we can use them in our post route
+ as req.body.listing -->

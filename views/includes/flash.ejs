@@ -1,0 +1,22 @@
+<% if (success.length) { %>
+    <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <%= success %>
+      <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+<% } %>
+
+
+<% if (updated.length) { %>
+    <div class="alert alert-info alert-dismissible fade show" role="alert">
+        <%= updated %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+<% } %>
+
+
+<% if (deleted.length) { %>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <%= deleted %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+<% } %>

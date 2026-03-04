@@ -1,0 +1,959 @@
+/* =========================================
+   1. VARIABLES & GLOBAL SETTINGS
+   =========================================
+*/
+
+
+
+:root {
+    /* New Brand Colors: Indigo & Teal Gradient */
+    --primary: #4f46e5;       /* Deep Indigo */
+    --secondary: #0ea5e9;     /* Sky Blue */
+    --accent: #10b981;        /* Emerald Green (Success/Price) */
+    --gradient: linear-gradient(135deg, #4f46e5 0%, #0ea5e9 100%);
+
+    /* Neutral Tones */
+    --dark: #0f172a;          /* Very Dark Slate */
+    --text-main: #334155;     /* Slate Gray */
+    --text-light: #64748b;    /* Light Slate */
+    --bg-body: #f8fafc;       /* Cool white background */
+    --white: #ffffff;
+
+    /* Effects */
+    --shadow-sm: 0 4px 6px -1px rgba(79, 70, 229, 0.1);
+    --shadow-md: 0 10px 15px -3px rgba(79, 70, 229, 0.15);
+    --shadow-hover: 0 20px 25px -5px rgba(79, 70, 229, 0.2);
+    --radius-lg: 1rem;
+    --radius-pill: 9999px;
+}
+
+/* =========================================
+   BACKGROUND: LIQUID MESH GRADIENT
+   ========================================= 
+*/
+body {
+    /* 1. The base colors (Indigo, Cyan, White, Soft Purple) */
+    background: linear-gradient(
+        -45deg, 
+        #eef2ff, /* Very light Indigo */
+        #e0f2fe, /* Very light Sky */
+        #f0fdf4, /* Very light Emerald */
+        #fff1f2  /* Very light Rose (for warmth) */
+    );
+    
+    /* 2. Zoom in so we see soft blends, not stripes */
+    background-size: 400% 400%;
+    
+    /* 3. The Animation */
+    animation: gradient-flow 15s ease infinite;
+    
+    /* 4. Essentials */
+    min-height: 100vh;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    color: var(--text-main);
+}
+
+/* 5. The Movement Logic */
+@keyframes gradient-flow {
+    0% {
+        background-position: 0% 50%;
+    }
+    50% {
+        background-position: 100% 50%;
+    }
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+/* =========================================
+   2. NAVBAR (Glassmorphism Style)
+   ========================================= */
+.navbar {
+    padding: 1rem 1.5rem;
+    background-color: rgba(255, 255, 255, 0.85); /* Semi-transparent */
+    backdrop-filter: blur(12px);                /* Blur effect */
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: var(--shadow-sm);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+/* BRAND ICON */
+.navbar-brand {
+    font-size: 1.8rem;
+    font-weight: 800;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.5px;
+    
+    /* Make sure it can transform */
+    display: inline-block; 
+    
+    /* The Animation: Bouncy and Smooth */
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* HOVER EFFECT */
+.navbar-brand:hover {
+    /* Scales up to 115% of original size */
+    transform: scale(1.15); 
+    
+    /* Optional: Rotate slightly for more personality */
+    /* transform: scale(1.15) rotate(-3deg); */
+}
+
+/* NAV LINKS */
+.navbar-nav .nav-link {
+    margin: 0 0.5rem;
+    font-weight: 600;
+    color: var(--text-main);
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-pill);
+    transition: all 0.3s ease;
+}
+
+/* Hover Effect: Soft Pill Background instead of Underline */
+.navbar-nav .nav-link:hover,
+.navbar-nav .nav-link.active {
+    color: var(--primary);
+    background-color: #e0e7ff; /* Very light indigo */
+}
+
+/* Disable the old underline */
+.navbar-nav .nav-link::after {
+    display: none;
+}
+
+/* =========================================
+   SEARCH BAR (Fixed Layout)
+   ========================================= */
+
+/* 1. Make the form a container for positioning */
+form[role="search"] {
+    position: relative; 
+    display: flex;
+    align-items: center;
+    min-width: 300px; /* Optional: Sets a minimum width for the bar */
+}
+
+/* 2. The Input Field */
+form[role="search"] input {
+    border-radius: var(--radius-pill);
+    padding: 0.7rem 1.5rem;
+    
+    /* IMPORTANT: Add padding on the right so text doesn't hit the button */
+    padding-right: 3.5rem; 
+    
+    border: 1px solid #e2e8f0; /* Thinner border looks cleaner */
+    background-color: #f8fafc;
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05); /* Subtle depth */
+    transition: all 0.3s ease;
+}
+
+/* Focus State */
+form[role="search"] input:focus {
+    background-color: var(--white);
+    border-color: var(--primary);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.15);
+    outline: none;
+}
+
+/* =========================================
+   SEARCH BAR (Side-by-Side Clean)
+   ========================================= */
+
+/* 1. Container: Aligns input and button nicely */
+form[role="search"] {
+    display: flex;       /* Forces them side-by-side */
+    gap: 0.5rem;         /* Adds space between input and button */
+    align-items: center;
+}
+
+/* 2. The Input Field */
+form[role="search"] input {
+    border-radius: 50px; /* Perfectly round "Pill" shape */
+    padding: 0.7rem 1.5rem; /* Comfortable internal spacing */
+    
+    border: 1px solid #cbd5e1; /* Clean grey border */
+    background-color: #f8fafc;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    width: 100%; /* Allows it to fill available space */
+}
+
+/* Input Focus: Glows with your brand color */
+form[role="search"] input:focus {
+    outline: none;
+    background-color: #fff;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1); /* Soft Indigo Glow */
+}
+
+/* 3. The Search Button */
+form[role="search"] button {
+    border-radius: 50px;
+    padding: 0.7rem 1.5rem;
+    
+    background: var(--gradient); /* Your new Awesome Gradient */
+    color: #ffffff;
+    border: none;
+    
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    white-space: nowrap; /* Prevents text wrapping */
+}
+
+/* Button Hover */
+form[role="search"] button:hover {
+    transform: translateY(-2px); /* Slight lift */
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.3); /* Colored shadow */
+}
+
+
+/* Hover Effect */
+form[role="search"] button:hover {
+    transform: scale(1.05); /* Slight pop */
+}
+
+/* =========================================
+   3. CARDS & LISTINGS (Floating Design)
+   ========================================= */
+.card {
+    border: none;
+    border-radius: var(--radius-lg);
+    background-color: var(--white);
+    box-shadow: var(--shadow-sm);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Bouncy effect */
+    overflow: hidden;
+    height: 100%;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-hover);
+}
+
+.card-img-top {
+    height: 240px;
+    width: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.card:hover .card-img-top {
+    transform: scale(1.08);
+}
+
+.card-body {
+    padding: 1.5rem;
+    position: relative;
+    background: var(--white);
+}
+
+/* Card Title */
+.card-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.3px;
+}
+
+/* Price Formatting */
+.card-text {
+    font-size: 1rem;
+    color: var(--text-light);
+    font-weight: 500;
+}
+
+.card-text b { /* Assuming price is in bold tags */
+    color: var(--primary);
+    font-size: 1.1rem;
+}
+
+/* Overlay Effect for Listing */
+.card-img-overlay {
+    background: linear-gradient(to top, rgba(0,0,0,0.4), transparent);
+    pointer-events: none;
+}
+
+/* =========================================
+   4. FORMS & CREATE LISTING
+   ========================================= */
+.create-listing {
+    max-width: 800px;
+    margin: 4rem auto;
+    padding: 3rem;
+    background: var(--white);
+    border-radius: 20px;
+    /* Soft colorful glow behind the form */
+    box-shadow: 0 20px 60px -15px rgba(79, 70, 229, 0.15); 
+    border: 1px solid #f1f5f9;
+}
+
+.create-listing h2 {
+    text-align: center;
+    font-weight: 800;
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 2.5rem;
+}
+
+.create-listing .form-label {
+    font-weight: 600;
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.create-listing .form-control {
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 0.8rem 1rem;
+    background-color: #f8fafc;
+    transition: all 0.3s ease;
+}
+
+.create-listing .form-control:focus {
+    background-color: var(--white);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+    outline: none;
+}
+
+/* =========================================
+   5. BUTTONS (Gradient & Modern)
+   ========================================= */
+.btn-primary, 
+.create-listing .btn-submit {
+    background: var(--gradient);
+    border: none;
+    border-radius: var(--radius-pill);
+    padding: 0.8rem 2rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--white);
+    box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.btn-primary:hover, 
+.create-listing .btn-submit:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(79, 70, 229, 0.4);
+    filter: brightness(110%);
+}
+
+.btn-outline-danger {
+    border-radius: var(--radius-pill);
+    border: 2px solid #ef4444;
+    color: #ef4444;
+    font-weight: 600;
+    padding: 0.5rem 1.5rem;
+}
+
+.btn-outline-danger:hover {
+    background-color: #ef4444;
+    color: var(--white);
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+}
+
+/* =========================================
+   6. FOOTER (Dark Theme)
+   ========================================= */
+footer {
+    margin-top: 6rem;
+    background-color: var(--dark);
+    color: #94a3b8; /* Slate-400 */
+    padding-top: 2rem;
+    border-top: none;
+}
+
+.f-info {
+    max-width: 1200px;
+    margin: auto;
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.f-info-socials a {
+    color: var(--white);
+    font-size: 1.5rem;
+    margin-right: 1.5rem;
+    transition: color 0.3s ease;
+}
+
+.f-info-socials a:hover {
+    color: var(--secondary); /* Sky Blue hover */
+}
+
+.f-info-links a {
+    color: #94a3b8;
+    text-decoration: none;
+    margin-left: 1.5rem;
+    transition: color 0.3s;
+}
+
+.f-info-links a:hover {
+    color: var(--white);
+}
+
+.dev {
+    color: var(--white);
+    font-weight: 600;
+}
+
+/* =========================================
+   7. UTILITIES & RESPONSIVE
+   ========================================= */
+.listings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); /* Slightly wider cards */
+    gap: 2rem;
+    padding: 2rem 0;
+}
+
+@media (max-width: 768px) {
+    .f-info {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+    }
+    
+    .navbar-brand {
+        font-size: 1.4rem;
+    }
+    
+    .create-listing {
+        padding: 1.5rem;
+        margin: 2rem 1rem;
+    }
+}
+
+/* =========================================
+   SHOW PAGE (Listing Details)
+   ========================================= */
+
+/* 1. The Main Card Container */
+.listing-detail {
+    /* Reset the hover effect from the main grid cards so it doesn't jump */
+    transform: none !important; 
+    transition: none !important;
+    
+    /* Premium Shadow specifically for the detail view */
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15) !important;
+    overflow: hidden; /* Keeps the image corners rounded */
+}
+
+/* 2. The Hero Image */
+.listing-detail .card-img-top {
+    height: 400px;          /* Taller image for the detail view */
+    object-fit: cover;      /* Ensures image covers area without distortion */
+    border-bottom: 5px solid var(--primary); /* subtle brand colored line */
+}
+
+/* 3. Typography & Spacing */
+.listing-detail .card-body {
+    padding: 2.5rem;        /* More breathing room */
+}
+
+.listing-detail .card-title {
+    font-size: 2rem;
+    font-weight: 800;
+    margin-bottom: 1rem;
+    
+    /* Apply the brand gradient to the title */
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.listing-detail .text-muted {
+    font-size: 1.1rem;
+    line-height: 1.7;       /* Better readability for descriptions */
+    color: var(--text-light);
+}
+
+/* 4. The Info List (Price, Location, etc.) */
+.listing-detail .list-group-item {
+    border: none;           /* Remove default bootstrap lines */
+    padding: 1rem 0;
+    font-size: 1.05rem;
+    color: var(--text-main);
+    border-bottom: 1px dashed #e2e8f0; /* Dashed separator looks more technical/modern */
+}
+
+/* Highlight the Price */
+.listing-detail .list-group-item:first-child {
+    font-size: 1.4rem;
+    color: var(--dark);
+    font-weight: 700;
+}
+
+/* 5. Action Buttons (Edit/Delete) */
+.listing-detail .btn {
+    padding: 0.8rem 0;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: var(--radius-pill);
+    transition: all 0.3s ease;
+}
+
+/* Edit Button (Soft Indigo) */
+.listing-detail .btn-outline-secondary {
+    border: 2px solid #e2e8f0;
+    color: var(--text-light);
+    background: transparent;
+}
+
+.listing-detail .btn-outline-secondary:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: #eef2ff; /* Very light indigo tint */
+}
+
+/* Delete Button (Soft Red) */
+.listing-detail .btn-outline-danger {
+    border: 2px solid #fee2e2;
+    color: #ef4444;
+    background: #fff5f5;
+}
+
+.listing-detail .btn-outline-danger:hover {
+    background: #ef4444;
+    color: white;
+    border-color: #ef4444;
+    box-shadow: 0 4px 12px rgba(239, 68, 68, 0.25);
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+    .listing-detail .card-img-top {
+        height: 250px;
+    }
+    .listing-detail .card-body {
+        padding: 1.5rem;
+    }
+    .listing-detail .card-title {
+        font-size: 1.5rem;
+    }
+}
+
+/* =========================================
+   BACKGROUND: THE "AURORA" EFFECT
+   ========================================= */
+   body {
+    /* Keep the base color */
+    background-color: #f8fafc;
+    /* Ensure background stays fixed behind scroll */
+    min-height: 100vh;
+    position: relative;
+    overflow-x: hidden; /* Prevent horizontal scrollbars from blobs */
+}
+
+/* =========================================
+   FIX: REMOVE UNDERLINES
+   ========================================= */
+
+/* 1. Remove underline from the clickable card wrapper */
+.listings-grid a,
+.card-link {
+    text-decoration: none !important;
+    color: inherit; /* Ensures text stays your color, not blue */
+}
+
+/* 2. Double check specifically for Titles and Prices */
+.card-title, 
+.card-text {
+    text-decoration: none !important;
+}
+
+/* 3. Ensure the hovered link doesn't turn blue/underlined */
+.listings-grid a:hover,
+.card-link:hover {
+    text-decoration: none !important;
+    color: inherit;
+}
+
+/* =========================================
+   REVIEW SECTION
+   ========================================= */
+
+   .review-section {
+    margin-top: 3rem;
+    padding: 2rem;
+    background: var(--white);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    border: 1px solid #e2e8f0;
+}
+
+/* Review Heading */
+.review-section h4 {
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    font-size: 1.4rem;
+
+    background: var(--gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Form spacing */
+.review-section form div {
+    margin-bottom: 1.5rem;
+}
+
+/* Labels */
+.review-section label {
+    font-weight: 600;
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--dark);
+}
+
+/* Range Slider */
+.review-section input[type="range"] {
+    width: 100%;
+    height: 6px;
+    border-radius: 10px;
+    background: #e2e8f0;
+    outline: none;
+    appearance: none;
+}
+
+/* Range Thumb */
+.review-section input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    height: 18px;
+    width: 18px;
+    border-radius: 50%;
+    background: var(--primary);
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(79, 70, 229, 0.4);
+}
+
+/* Textarea */
+.review-section textarea {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    border-radius: 12px;
+    border: 2px solid #e2e8f0;
+    background-color: #f8fafc;
+    resize: vertical;
+    transition: all 0.3s ease;
+}
+
+.review-section textarea:focus {
+    background-color: var(--white);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+    outline: none;
+}
+
+/* Submit Button */
+.review-section button {
+    background: var(--gradient);
+    border: none;
+    border-radius: var(--radius-pill);
+    padding: 0.8rem 2rem;
+    font-weight: 600;
+    color: white;
+    transition: all 0.3s ease;
+}
+
+.review-section button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(79, 70, 229, 0.3);
+}
+
+/* ================================
+   REVIEW SECTION - AIRBNB STYLE
+================================ */
+
+.reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.5rem;
+}
+
+.review-card {
+    padding: 1.5rem 0;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.review-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 0.8rem;
+}
+
+.review-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #4f46e5, #0ea5e9);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: white;
+    font-size: 1.1rem;
+}
+
+.review-user-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.review-name {
+    margin: 0;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.review-meta {
+    color: #6b7280;
+    font-size: 0.85rem;
+}
+
+.review-rating {
+    font-size: 0.95rem;
+    margin-bottom: 0.6rem;
+}
+
+.review-text {
+    font-size: 0.95rem;
+    color: #374151;
+    line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .reviews-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* =========================
+   REVIEW DELETE BUTTON
+========================= */
+
+.review-delete {
+    background: transparent;
+    border: 1.5px solid #ef4444;
+    color: #ef4444;
+    padding: 0.4rem 0.9rem;
+    border-radius: 50px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.review-delete:hover {
+    background: #ef4444;
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 10px rgba(239, 68, 68, 0.25);
+}
+
+.review-delete:active {
+    transform: scale(0.96);
+}
+
+.review-delete:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.2);
+}
+.review-actions {
+    margin-top: 0.5rem;
+}
+
+
+/* =========================================
+   8. PREMIUM LANDING PAGE (HERO SECTION)
+   ========================================= */
+
+/* Full screen wrapper, hide overflow to keep orbs inside */
+.landing-wrapper {
+    min-height: calc(100vh - 80px); 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden; 
+    z-index: 1;
+}
+
+/* --- AMBIENT GLOW ORBS --- */
+.ambient-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px); /* Creates the soft glowing light effect */
+    z-index: -1;
+    animation: float 10s infinite alternate ease-in-out;
+}
+
+.orb-1 {
+    width: 400px;
+    height: 400px;
+    background: rgba(79, 70, 229, 0.4); /* Primary Indigo */
+    top: -10%;
+    left: -10%;
+}
+
+.orb-2 {
+    width: 350px;
+    height: 350px;
+    background: rgba(14, 165, 233, 0.4); /* Secondary Sky */
+    bottom: -10%;
+    right: -5%;
+    animation-delay: -3s;
+}
+
+.orb-3 {
+    width: 300px;
+    height: 300px;
+    background: rgba(16, 185, 129, 0.3); /* Accent Emerald */
+    top: 40%;
+    left: 40%;
+    animation-delay: -6s;
+}
+
+/* --- THE GLASS PANEL --- */
+.hero-glass-panel {
+    max-width: 850px;
+    padding: 4rem 3rem;
+    background: rgba(255, 255, 255, 0.4); /* Frosted white */
+    backdrop-filter: blur(20px); /* The magic glass blur */
+    -webkit-backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    border-radius: 24px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.1);
+    animation: fadeUp 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+/* --- BADGE --- */
+.badge-new {
+    display: inline-block;
+    padding: 0.6rem 1.5rem;
+    border-radius: var(--radius-pill);
+    background: var(--white);
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border: 1px solid rgba(79, 70, 229, 0.15);
+}
+
+/* --- TYPOGRAPHY --- */
+.hero-title {
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 900;
+    color: var(--dark);
+    line-height: 1.1;
+    letter-spacing: -1.5px;
+}
+
+/* The Animated Highlight Text */
+.text-highlight.animate-gradient {
+    background: linear-gradient(to right, #4f46e5, #0ea5e9, #10b981, #4f46e5);
+    background-size: 300% auto;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shine 6s linear infinite;
+    display: inline-block;
+}
+
+.hero-subtitle {
+    font-size: clamp(1.1rem, 2vw, 1.25rem);
+    color: #475569;
+    line-height: 1.7;
+    max-width: 650px;
+    margin-left: auto;
+    margin-right: auto;
+    font-weight: 500;
+}
+
+/* --- BUTTONS --- */
+.btn-hero-primary {
+    background: var(--gradient);
+    color: var(--white);
+    border: none;
+    padding: 1.1rem 2.8rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+    border-radius: var(--radius-pill);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.btn-hero-primary:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 20px 40px -10px rgba(79, 70, 229, 0.5) !important;
+    color: var(--white);
+}
+
+.btn-hero-secondary {
+    background: rgba(255, 255, 255, 0.8);
+    color: var(--dark);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    padding: 1.1rem 2.8rem;
+    font-size: 1.15rem;
+    font-weight: 700;
+    border-radius: var(--radius-pill);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    backdrop-filter: blur(5px);
+}
+
+.btn-hero-secondary:hover {
+    border-color: var(--primary);
+    color: var(--primary);
+    background: var(--white);
+    transform: translateY(-5px) scale(1.02);
+}
+
+/* --- ANIMATIONS --- */
+@keyframes fadeUp {
+    0% { opacity: 0; transform: translateY(40px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+    0% { transform: translateY(0) translateX(0); }
+    100% { transform: translateY(-30px) translateX(30px); }
+}
+
+@keyframes shine {
+    to { background-position: 300% center; }
+}
+
+/* Mobile Adjustments */
+@media (max-width: 768px) {
+    .hero-glass-panel {
+        padding: 2.5rem 1.5rem;
+        margin: 1rem;
+    }
+    .hero-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+    .hero-actions .btn {
+        width: 100%;
+    }
+}
