@@ -14,12 +14,12 @@ const validateListing = (req, res, next) => {
     if (result.error) {
         throw new ExpressErr(400, res.error.details[0].message);
     } else{
-        next();
+        next(); 
     }
 };
 
 // Index route
-router.get("/", wrapAsync(async (req, res) => {
+router.get("/", isLoggedIn,  wrapAsync(async (req, res) => {
     const allLists = await Listing.find({});
     res.render("lists/index", { allLists });
 }));
@@ -28,8 +28,7 @@ router.get("/", wrapAsync(async (req, res) => {
 // app thinks new is also a id
 router.get("/new", isLoggedIn, async (req, res) => {
     
-        res.render("lists/new");
-    
+    res.render("lists/new");
     
 });
 
@@ -46,7 +45,8 @@ router.get("/:id", isLoggedIn, wrapAsync(async (req, res) => {
 
     const listing = await Listing
         .findById(id)
-        .populate("reviews");  // 👈 must match schema exactly
+        .populate("reviews")
+        .populate("owner")  // 👈 must match schema exactly
 
     if (!listing) {
         req.flash("errors", "Listing not avaiable")
@@ -67,6 +67,7 @@ router.post("/", isLoggedIn,
         
 
         const newListing = new Listing(req.body.listing);
+        newListing.owner = req.user._id;
         await newListing.save();
         req.flash("success", "New listing created");
 

@@ -783,6 +783,7 @@ footer {
 .review-actions {
     margin-top: 0.5rem;
 }
+
 /* =========================================
    PREMIUM LANDING HERO
    ========================================= */
@@ -1084,4 +1085,40 @@ footer {
     width:100%;
 }
 
+}
+
+.listing-owner{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    margin-bottom:18px;
+}
+
+.owner-avatar{
+    width:42px;
+    height:42px;
+    border-radius:50%;
+    background:#4f46e5;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:600;
+    font-size:1rem;
+}
+
+.owner-info{
+    display:flex;
+    flex-direction:column;
+    line-height:1.2;
+}
+
+.owner-label{
+    font-size:0.75rem;
+    color:#6b7280;
+}
+
+.owner-name{
+    font-weight:600;
+    color:#111827;
 }

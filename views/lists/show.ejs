@@ -17,6 +17,17 @@
 
                     <h3 class="card-title mb-3"><%= listing.title %></h3>
 
+                    <div class="listing-owner">
+                        <div class="owner-avatar">
+                            <%= listing.owner.username.charAt(0).toUpperCase() %>
+                        </div>
+                    
+                        <div class="owner-info">
+                            <span class="owner-label">Owned by</span>
+                            <span class="owner-name"><%= listing.owner.username %></span>
+                        </div>
+                    </div>
+
                     <p class="text-muted mb-3">
                         <%= listing.description %>
                     </p>
@@ -34,29 +45,32 @@
                         </li>
                     </ul>
 
+                    <% if(currentUser && listing.owner._id.equals(currentUser._id)){ %>
                     <!-- ACTION BUTTONS -->
-                    <div class="d-flex gap-2">
+                        <div class="d-flex gap-2">
 
-                        <!-- EDIT -->
-                        <a 
-                            href="/listings/<%= listing._id %>/edit" 
-                            class="btn btn-outline-secondary w-100"
-                        >
-                            Edit Listing
-                        </a>
+                            <!-- EDIT -->
+                            <a 
+                                href="/listings/<%= listing._id %>/edit" 
+                                class="btn btn-outline-secondary w-100"
+                            >
+                                Edit Listing
+                            </a>
 
-                        <!-- DELETE -->
-                        <form 
-                            method="POST" 
-                            action="/listings/<%= listing._id %>?_method=DELETE"
-                            class="w-100"
-                        >
-                            <button class="btn btn-outline-danger w-100">
-                                Delete Listing
-                            </button>
-                        </form>
+                            <!-- DELETE -->
+                            <form 
+                                method="POST" 
+                                action="/listings/<%= listing._id %>?_method=DELETE"
+                                class="w-100"
+                            >
+                                <button class="btn btn-outline-danger w-100">
+                                    Delete Listing
+                                </button>
+                            </form>
 
-                    </div>
+                        </div>
+
+                    <% } %>
 
                 </div>
             </div>
