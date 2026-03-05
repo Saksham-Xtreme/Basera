@@ -9,7 +9,7 @@
 
                     <h3 class="text-center mb-4">Edit Your Listing</h3>
 
-                    <form method="POST" action="/listings/<%= listing._id %>?_method=PUT">
+                    <form method="POST" action="/listings/<%= listing._id %>?_method=PUT" enctype="multipart/form-data" >
 
                         <!-- Title -->
                         <div class="mb-3">
@@ -33,13 +33,22 @@
                             ><%= listing.description %></textarea>
                         </div>
 
+                        <div class="mb-3">
+                            <label class="form-label">Current Image</label>
+                            <br>
+                            <img 
+                                src="<%= listing.image.url %>" 
+                                alt="Current Image"
+                                style="width: 200px; border-radius:10px;"
+                            >
+                        </div>
+
                         <!-- Image URL -->
                         <div class="mb-3">
-                            <label class="form-label">Image URL</label>
+                            <label class="form-label">Upload New Image</label>
                             <input
-                                name="listing[image][url]"
-                                value="<%= listing.image.url %>"
-                                type="text"
+                                type="file"
+                                name="listing[image]"
                                 class="form-control"
                             >
                         </div>

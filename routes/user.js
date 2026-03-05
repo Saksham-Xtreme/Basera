@@ -1,10 +1,10 @@
 const express = require("express");
 const router = express.Router();
-const User = require("../models/user.js");
+// const User = require("../models/user.js");
+
 const wrapAsync = require("../utils/wrapAsync.js");
 const passport = require("passport");
 const { saveRedirectUrl } = require("../middleware.js");
-
 
 const UserControl = require("../controllers/user.js");
 
@@ -29,9 +29,9 @@ router.post(
     
 );
 
- 
 
 // signup
+
 router.post("/signup",
 wrapAsync(UserControl.postSignUp));
 

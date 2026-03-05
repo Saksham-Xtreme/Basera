@@ -88,25 +88,29 @@
                 >
             
                     <!-- Rating -->
-                    <div class="mb-3">
-                        <label class="form-label">
-                            Rating: <span id="rating-value">3</span>
-                        </label>
-                    
-                        <input 
-                            type="range" 
-                            min="1" 
-                            max="5" 
-                            value="3"
-                            name="review[rating]" 
-                            class="form-range"
-                            id="rating-slider"
-                            required
-                        >
-                    
-                        <div class="invalid-feedback">
-                            Please select a rating.
-                        </div>
+                    <div class="mb-4">
+
+                        <fieldset class="starability-coinFlip">
+                        
+                        <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" checked aria-label="No rating." />
+                        
+                        <input type="radio" id="rate1" name="review[rating]" value="1" />
+                        <label for="rate1" title="Terrible">1 star</label>
+                        
+                        <input type="radio" id="rate2" name="review[rating]" value="2" />
+                        <label for="rate2" title="Not good">2 stars</label>
+                        
+                        <input type="radio" id="rate3" name="review[rating]" value="3" />
+                        <label for="rate3" title="Average">3 stars</label>
+                        
+                        <input type="radio" id="rate4" name="review[rating]" value="4" />
+                        <label for="rate4" title="Very good">4 stars</label>
+                        
+                        <input type="radio" id="rate5" name="review[rating]" value="5" />
+                        <label for="rate5" title="Amazing">5 stars</label>
+                        
+                        </fieldset>
+                        
                     </div>
             
                     <!-- Comment -->
@@ -170,11 +174,9 @@
                             </div>
 
                             <!-- Rating -->
-                            <div class="review-rating">
-                                <% for(let i=0; i<review.rating; i++){ %>
-                                    ⭐
-                                <% } %>
-                            </div>
+                            <p class="starability-result" data-rating="<%= review.rating %>">
+                                Rated: <%= review.rating %> stars
+                            </p>
 
                             <!-- Comment -->
                             <p class="review-text">
