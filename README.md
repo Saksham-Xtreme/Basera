@@ -1,60 +1,83 @@
 # Basera
 
-Basera is a full-stack property listing web application inspired by Airbnb.  
-Users can create property listings, view listings, update them, delete them, and add reviews.
+**Basera** is a full-stack property listing web application inspired by platforms like Airbnb.
+Users can create property listings, upload images, leave reviews, and manage their listings through a simple and intuitive interface.
 
-The project is built using **Node.js**, **Express**, **MongoDB**, and **EJS** with RESTful routing and server-side rendering.
-
----
-
-## Features
-
-- **Create property listings**
-- **View all listings**
-- **Edit and update listings**
-- **Delete listings**
-- **Add reviews to listings**
-- **Delete reviews**
-- **Flash messages for user actions**
-- **Server-side validation**
-- **Error handling (400 / 404 pages)**
-- **RESTful routes**
-- **MVC-style project structure**
+The application follows a **RESTful architecture** with a **Model–View–Controller (MVC)** structure and server-side rendering using EJS.
 
 ---
 
-## Tech Stack
+# Features
 
-### Backend
-- Node.js
-- Express.js
-- MongoDB
-- Mongoose
+### Property Listings
 
-### Frontend
-- EJS
-- Bootstrap
-- EJS-Mate (layout engine)
+* Create new property listings
+* Upload listing images
+* View all available listings
+* View individual listing details
+* Edit existing listings
+* Delete listings
 
-### Middleware
-- method-override
-- express-session
-- connect-flash
+### Reviews System
+
+* Add reviews to listings
+* Delete reviews
+
+### Application Features
+
+* Flash notifications for user actions
+* Server-side validation
+* Error handling (400 / 404 / general errors)
+* RESTful routing structure
+* MVC project architecture
 
 ---
 
-## Project Structure
+# Tech Stack
+
+## Backend
+
+* **Node.js**
+* **Express.js**
+* **MongoDB**
+* **Mongoose**
+
+## Frontend
+
+* **EJS**
+* **Bootstrap**
+* **EJS-Mate** (layout engine)
+
+## Middleware
+
+* method-override
+* express-session
+* connect-flash
+* multer (file upload)
+* multer-storage-cloudinary (Cloudinary image storage)
+
+## Media Storage
+
+* **Cloudinary** (image hosting)
+
+---
+
+# Project Architecture
 
 ```
 Basera
 │
+├── controllers
+│   └── listings.js
+│
 ├── models
 │   ├── listing.js
-│   └── reviews.js
+│   ├── reviews.js
+│   └── user.js
 │
 ├── routes
-│   ├── listing.js
-│   └── review.js
+│   ├── listings.js
+│   └── reviews.js
 │
 ├── utils
 │   ├── ExpressErr.js
@@ -68,6 +91,7 @@ Basera
 ├── public
 │   └── css
 │
+├── cloudConfig.js
 ├── schema.js
 ├── app.js
 ├── package.json
@@ -76,86 +100,118 @@ Basera
 
 ---
 
-## Installation
+# Installation
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/Saksham-Xtreme/Basera.git
-   ```
+### 1. Clone the repository
 
-2. **Move into the project folder**
-   ```bash
-   cd Basera
-   ```
+```bash
+git clone https://github.com/Saksham-Xtreme/Basera.git
+```
 
-3. **Install dependencies**
-   ```bash
-   npm install
-   ```
+### 2. Move into the project directory
 
-4. **Start MongoDB locally**
-   ```bash
-   mongod
-   ```
+```bash
+cd Basera
+```
 
-5. **Run the application**
-   ```bash
-   node app.js
-   ```
+### 3. Install dependencies
 
-6. **Server will start at:**
-   [http://localhost:8080](http://localhost:8080)
+```bash
+npm install
+```
 
----
+### 4. Create environment variables
 
-## Routes Overview
+Create a `.env` file in the root directory:
 
-### Listings
+```
+CLOUD_NAME=your_cloudinary_cloud_name
+CLOUD_API_KEY=your_cloudinary_api_key
+CLOUD_API_SECRET=your_cloudinary_api_secret
+```
 
-| Method | Route                | Description              |
-|--------|----------------------|--------------------------|
-| GET    | `/listings`          | Show all listings        |
-| GET    | `/listings/new`      | Form to create listing   |
-| POST   | `/listings`          | Create listing           |
-| GET    | `/listings/:id`      | Show single listing      |
-| GET    | `/listings/:id/edit` | Edit listing             |
-| PUT    | `/listings/:id`      | Update listing           |
-| DELETE | `/listings/:id`      | Delete listing           |
+### 5. Start MongoDB locally
 
-### Reviews
+```bash
+mongod
+```
 
-| Method | Route                              | Description         |
-|--------|------------------------------------|---------------------|
-| POST   | `/listings/:id/reviews`           | Add review          |
-| DELETE | `/listings/:id/reviews/:reviewId` | Delete review       |
+### 6. Run the application
+
+```bash
+node app.js
+```
+
+### 7. Open in browser
+
+```
+http://localhost:8080
+```
 
 ---
 
-## Flash Messages
+# API Routes
 
-The application uses **connect-flash** to show notifications for:
+## Listings
 
-- Listing creation
-- Listing update
-- Listing deletion
-- Review creation
-- Review deletion
-
----
-
-## Error Handling
-
-Custom error pages implemented for:
-
-- **400 Bad Request**
-- **404 Page Not Found**
-- **General server errors**
+| Method | Route                | Description            |
+| ------ | -------------------- | ---------------------- |
+| GET    | `/listings`          | Show all listings      |
+| GET    | `/listings/new`      | Form to create listing |
+| POST   | `/listings`          | Create listing         |
+| GET    | `/listings/:id`      | Show listing           |
+| GET    | `/listings/:id/edit` | Edit listing           |
+| PUT    | `/listings/:id`      | Update listing         |
+| DELETE | `/listings/:id`      | Delete listing         |
 
 ---
 
-## Author
+## Reviews
+
+| Method | Route                             | Description   |
+| ------ | --------------------------------- | ------------- |
+| POST   | `/listings/:id/reviews`           | Create review |
+| DELETE | `/listings/:id/reviews/:reviewId` | Delete review |
+
+---
+
+# Flash Messages
+
+The application uses **connect-flash** to display notifications for:
+
+* Listing creation
+* Listing updates
+* Listing deletion
+* Review creation
+* Review deletion
+
+---
+
+# Error Handling
+
+Custom error handling is implemented for:
+
+* **400 — Bad Request**
+* **404 — Page Not Found**
+* **General Server Errors**
+
+---
+
+# Security Notes
+
+Sensitive credentials are stored in **environment variables** using `.env`.
+The `.env` file is excluded from version control using `.gitignore`.
+
+---
+
+# Author
 
 **Saksham Tripathi**
 
-- **GitHub**: [https://github.com/Saksham-Xtreme](https://github.com/Saksham-Xtreme)
-- **LinkedIn**: [https://linkedin.com/in/saksham-tripathi-7b25b0330](https://linkedin.com/in/saksham-tripathi-7b25b0330)
+Full Stack Developer | MERN Stack
+
+GitHub
+https://github.com/Saksham-Xtreme
+
+LinkedIn
+https://linkedin.com/in/saksham-tripathi-7b25b0330
