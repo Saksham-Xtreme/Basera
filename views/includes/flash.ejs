@@ -3,7 +3,7 @@
       <%= success %>
       <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
-<% } %>
+<% } %> 
 
 
 <% if (updated.length) { %>
@@ -17,6 +17,13 @@
 <% if (deleted.length) { %>
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
         <%= deleted %>
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+<% } %>
+
+<% if (errors.length) { %>
+    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <%= errors %>
         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
     </div>
 <% } %>

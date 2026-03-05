@@ -1,0 +1,73 @@
+<% layout('layouts/boilerplate') %>
+
+<div class="container mt-5" style="max-width:500px;">
+
+    <h2 class="mb-4 text-center">Create Account</h2>
+
+    <form id="signupForm" action="/signup" method="POST">
+
+        <div class="mb-3">
+            <label class="form-label">Username</label>
+            <input 
+                type="text"
+                name="username"
+                class="form-control"
+                required
+            >
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input 
+                type="email"
+                name="email"
+                class="form-control"
+                required
+            >
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Password</label>
+            <input 
+                type="password"
+                id="password"
+                name="password"
+                class="form-control"
+                required
+            >
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Confirm Password</label>
+            <input 
+                type="password"
+                id="confirmPassword"
+                class="form-control"
+                required
+            >
+            <div id="passwordError" class="text-danger mt-1"></div>
+        </div>
+
+        <button class="btn btn-primary w-100">
+            Sign Up
+        </button>
+
+    </form>
+
+</div>
+
+<script>
+const form = document.getElementById("signupForm");
+const password = document.getElementById("password");
+const confirmPassword = document.getElementById("confirmPassword");
+const error = document.getElementById("passwordError");
+
+form.addEventListener("submit", function(e){
+
+    if(password.value !== confirmPassword.value){
+        e.preventDefault();
+        error.textContent = "Passwords do not match";
+    }
+
+});
+</script>

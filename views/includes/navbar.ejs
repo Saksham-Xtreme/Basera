@@ -1,54 +1,52 @@
 <nav class="navbar navbar-expand-md bg-body-light sticky-top">
-    <div class="container-fluid">
-  
-      <!-- Brand -->
-      <a class="navbar-brand" href="/"><i class="fa-solid fa-house-user"></i></a>
-  
-      <!-- Toggler -->
-      <button class="navbar-toggler" type="button"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarSupportedContent"
-        >
-        <span class="navbar-toggler-icon"></span>
-      </button>
-  
-      <!-- Navbar content -->
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-  
-        <!-- Left navigation (anchors only) -->
-        <div class="navbar-nav me-auto mb-2 mb-lg-0">
-  
-          <a class="nav-link" href="/listings">All Listings</a>
-          <a class="nav-link " aria-current="page" href="/listings/new">Add new Listing</a>
-  
-          <!-- Dropdown -->
-          <div class="nav-item dropdown">
-  
-            <!-- Dropdown menu (NO ul/li) -->
-            <div class="dropdown-menu">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <hr class="dropdown-divider">
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </div>
-  
-          
-  
-        </div>
-  
-        <!-- Right side (search can stay form-based) -->
-        <form class="d-flex" role="search">
-          <input class="form-control me-2"
-                 type="search"
-                 placeholder="Search"
-                 aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">
-            Search
-          </button>
-        </form>
-  
+
+  <div class="container-fluid">
+
+    <!-- Brand -->
+    <a class="navbar-brand" href="/">
+      <i class="fa-solid fa-house-user"></i> Basera
+    </a>
+
+    <!-- Mobile toggle -->
+    <button class="navbar-toggler"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+
+      <!-- Left Side -->
+      <div class="navbar-nav me-auto">
+
+        <a class="nav-link" href="/listings">All Listings</a>
+
+        <a class="nav-link" href="/listings/new">
+          Add New Listing
+        </a>
+
       </div>
+
+      <!-- Right Side -->
+      <div class="navbar-nav ms-auto">
+
+        <% if(!currentUser){ %>
+
+            <a class="nav-link" href="/signup">Sign Up</a>
+
+            <a class="nav-link" href="/login">Login</a>
+
+        <% } else { %>
+
+            <a class="nav-link" href="/logout">Logout</a>
+
+        <% } %>
+
+      </div>
+
     </div>
+
+  </div>
+
 </nav>
-  
