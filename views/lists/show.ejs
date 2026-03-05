@@ -19,7 +19,7 @@
 
                     <div class="listing-owner">
                         <div class="owner-avatar">
-                            <%= listing.owner.username.charAt(0).toUpperCase() %>
+                            <%= listing.owner ? listing.owner.username.charAt(0).toUpperCase() : "?" %>
                         </div>
                     
                         <div class="owner-info">
@@ -197,8 +197,7 @@
 
                     <% } %>
 
-                </div>
-
+                </div>  
 
         </div>
     </div>

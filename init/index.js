@@ -1,34 +1,32 @@
+require("dotenv").config();
+
 const mongoose = require("mongoose");
 const initData = require("./data.js");
 const Listing = require("../models/listing.js");
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/AirBnb";
-
-main()
-    .then(() => {
-        console.log("Connected to DB");
-    })
-
-    .catch((err) => {
-        console.log(err);
-    });
-
-
+const MONGO_URL = process.env.MONGO_URL || "mongodb://127.0.0.1:27017/AirBnb";
 
 async function main() {
     await mongoose.connect(MONGO_URL);
-    console.log("Connected to init");
-
-   
+    console.log("Connected DB:", mongoose.connection.db.databaseName);
 }
 
-const initDB = async() => {
+const initDB = async () => {
     await Listing.deleteMany({});
-    initData.data = initData.data.map((obj)=> ({...obj, owner: "69a895e9c479681e48ae78e6" })); 
-    await Listing.insertMany(initData.data);
-    console.log("Data initialized");
 
+    const listings = initData.data.map((obj) => ({
+        ...obj,
+        owner: "69a895e9c479681e48ae78e6"
+    }));
+
+    await Listing.insertMany(listings);
+
+    console.log("Database initialized with", listings.length, "listings");
 };
 
-initDB();
-
+main()
+.then(async () => {
+    await initDB();
+    mongoose.connection.close();
+})
+.catch((err) => console.log(err));
