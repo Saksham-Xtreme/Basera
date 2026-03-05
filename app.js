@@ -1,3 +1,10 @@
+if (process.env.NODE_ENV !== "production") {
+    require("dotenv").config();
+}
+
+
+
+
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
@@ -9,6 +16,8 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const User = require("./models/user.js");
+
+
 
 const listingRoute = require("./routes/listing.js");
 const reviewRoute = require("./routes/review.js");
@@ -24,10 +33,10 @@ async function main() {
 
     console.log("Connected to DB");
 
-    app.listen(8080, () => {
+    const port = process.env.PORT || 8080;
 
-        console.log("Server is listening on port 8080");
-
+    app.listen(port, () => {
+        console.log(`Server is listening on port ${port}`);
     });
 
 }
