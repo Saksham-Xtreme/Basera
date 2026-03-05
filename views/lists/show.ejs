@@ -75,6 +75,7 @@
                 </div>
             </div>
 
+            <% if(currentUser){ %>
             <div class="review-section mt-5">
 
                 <h4 class="mb-4">Leave a Review</h4>
@@ -127,6 +128,14 @@
                     </button>
             
                 </form>
+
+                <% } else { %>
+
+                    <p class="text-muted mt-4">
+                      Please <a href="/login">log in</a> to leave a review.
+                    </p>
+                    
+                <% } %>
             
                 <hr class="my-5">
             
@@ -146,11 +155,13 @@
                             <div class="review-header">
 
                                 <div class="review-avatar">
-                                    <%= review.comment.charAt(0).toUpperCase() %>
+                                    <%= review.author.username.charAt(0).toUpperCase() %>
                                 </div>
 
                                 <div class="review-user-info">
-                                    <h6 class="review-name">Guest</h6>
+                                    <h6 class="review-name">
+                                        <%= review.author ? review.author.username : "Guest" %>
+                                    </h6>
                                     <small class="review-meta">
                                         <%= review.createdAt.toDateString() %>
                                     </small>
@@ -169,12 +180,16 @@
                             <p class="review-text">
                                 <%= review.comment %>
                             </p>
-
+                            
+                            <% if(currentUser && review.author && review.author._id.toString() === currentUser._id.toString()){ %>
                             <div class="review-actions">
                                 <form method="POST" action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
                                     <button class="review-delete">Delete</button>
                                 </form>
                             </div>
+
+                            <% }  %>
+                             
 
                         </div>
 

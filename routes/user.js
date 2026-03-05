@@ -5,25 +5,17 @@ const wrapAsync = require("../utils/wrapAsync.js");
 const passport = require("passport");
 const { saveRedirectUrl } = require("../middleware.js");
 
+
+const UserControl = require("../controllers/user.js");
+
 // signup page
-router.get("/signup",(req,res)=>{
-    res.render("users/signup");
-});
+router.get("/signup",UserControl.renderSignUp);
 
 // login page
-router.get("/login",(req,res)=>{
-    res.render("users/login");
-});
+router.get("/login", UserControl.renderLogin);
 
-// logout
-router.get("/logout",(req,res,next)=>{
-    req.logout(function(err){
-        if(err){ return next(err); }
-
-        req.flash("success","Logged out successfully");
-        res.redirect("/listings");
-    });
-});
+// logout  
+router.get("/logout", UserControl.renderLogout);
 
 
 // login
@@ -33,44 +25,14 @@ router.post(
     passport.authenticate("local",{
         failureRedirect:"/login",
         failureFlash:true
-    }),
-    (req,res)=>{
-
-        req.flash("success","Welcome back!");
-
-        let redirectUrl = res.locals.redirectUrl || "/listings";
-
-        res.redirect(redirectUrl);
-    }
+    }), UserControl.postLogin
+    
 );
 
  
+
 // signup
 router.post("/signup",
-wrapAsync(async(req,res,next)=>{
-
-    try{
-
-        const {username,email,password} = req.body;
-
-        const newUser = new User({username,email});
-
-        const registeredUser = await User.register(newUser,password);
-
-        req.login(registeredUser,(err)=>{
-            if(err){ return next(err); }
-
-            req.flash("success","Welcome to Basera!");
-            res.redirect("/listings");
-        });
-
-    }catch(e){
-
-        req.flash("errors",e.message);
-        res.redirect("/signup");
-
-    }
-
-}));
+wrapAsync(UserControl.postSignUp));
 
 module.exports = router;
