@@ -19,12 +19,12 @@
 
                     <div class="listing-owner">
                         <div class="owner-avatar">
-                            <%= listing.owner ? listing.owner.username.charAt(0).toUpperCase() : "?" %>
+                            <%= listing.owner?.username || "Unknown user" %>
                         </div>
                     
                         <div class="owner-info">
                             <span class="owner-label">Owned by</span>
-                            <span class="owner-name"><%= listing.owner.username %></span>
+                            <span class="owner-name"><%= listing.owner?.username || "Unknown user" %></span>
                         </div>
                     </div>
 
@@ -45,7 +45,7 @@
                         </li>
                     </ul>
 
-                    <% if(currentUser && listing.owner._id.equals(currentUser._id)){ %>
+                    <% if(currentUser && listing.owner && listing.owner._id.equals(currentUser._id)){ %>
                     <!-- ACTION BUTTONS -->
                         <div class="d-flex gap-2">
 
@@ -159,7 +159,7 @@
                             <div class="review-header">
 
                                 <div class="review-avatar">
-                                    <%= review.author.username.charAt(0).toUpperCase() %>
+                                    <%= review.author ? review.author.username.charAt(0).toUpperCase() : "G" %>
                                 </div>
 
                                 <div class="review-user-info">
