@@ -37,6 +37,7 @@ This project is built as a portfolio demonstration of full-stack development ski
 - Users can simulate booking a listing
 - Booking confirmation page for demonstration
 - **No real payment processing (portfolio feature)**
+-  Authorization (listing ownership)
 
 ### Application Features
 - Flash notifications for user actions
@@ -226,7 +227,6 @@ All errors are routed to a centralized error page.
 
 Possible enhancements:
 - User authentication (Passport.js)
-- Authorization (listing ownership)
 - Payment integration
 - Map integration for property locations
 - Advanced search and filters
