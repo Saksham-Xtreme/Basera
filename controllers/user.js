@@ -10,7 +10,7 @@ module.exports.postSignUp = async (req, res, next) => {
         const existingUser = await User.findOne({ email });
 
         if (existingUser) {
-            req.flash("error", "This email is already registered. Please log in.");
+            req.flash("errors", "This email is already registered. Please log in.");
             return res.redirect("/signup");
         }
 
@@ -27,7 +27,7 @@ module.exports.postSignUp = async (req, res, next) => {
 
     } catch (e) {
 
-        req.flash("error", e.message);
+        req.flash("errors", e.message);
         res.redirect("/signup");
 
     }
