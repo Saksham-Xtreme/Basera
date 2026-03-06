@@ -1,26 +1,33 @@
 const User = require("../models/user.js");
 
-module.exports.postSignUp = async(req,res,next)=>{
+module.exports.postSignUp = async (req, res, next) => {
 
-    try{
+    try {
 
-        const {username,email,password} = req.body;
+        const { username, email, password } = req.body;
 
-        const newUser = new User({username,email});
+        // CHECK IF EMAIL ALREADY EXISTS
+        const existingUser = await User.findOne({ email });
 
-        const registeredUser = await User.register(newUser,password);
+        if (existingUser) {
+            req.flash("error", "This email is already registered. Please log in.");
+            return res.redirect("/signup");
+        }
 
-        req.login(registeredUser,(err)=>{
-            if(err){ return next(err); }
+        const newUser = new User({ username, email });
 
-            req.flash("success","Welcome to Basera!");
+        const registeredUser = await User.register(newUser, password);
+
+        req.login(registeredUser, (err) => {
+            if (err) { return next(err); }
+
+            req.flash("success", "Welcome to Basera!");
             res.redirect("/listings");
         });
 
-    } catch(e){
+    } catch (e) {
 
-        req.flash("errors",e.message);
-
+        req.flash("error", e.message);
         res.redirect("/signup");
 
     }
