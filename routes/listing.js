@@ -79,6 +79,8 @@ router
 
 // Delete route , this will delete the listing
 
+router.get("/:id/book", isLoggedIn, wrapAsync(ListingControl.getBook));
 
+router.post("/:id/book", isLoggedIn, wrapAsync(ListingControl.postBook));
 
 module.exports = router;

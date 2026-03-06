@@ -1,0 +1,53 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container my-5">
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+
+            <div class="card shadow border-0 rounded-4 text-center p-4">
+
+                <div class="mb-3">
+                    <i class="fa-solid fa-circle-check text-success" style="font-size:60px;"></i>
+                </div>
+
+                <h2 class="fw-bold mb-2">Thank You for Booking!</h2>
+
+                <p class="text-muted">
+                    This booking was successful, but please note that this website is a 
+                    <strong>demo project</strong> created to showcase my development skills.
+                </p>
+
+                <p class="text-muted">
+                    No payment is required. The booking feature is only a reference 
+                    implementation inspired by real platforms.
+                </p>
+
+                <p class="fw-semibold">
+                    Thank you for visiting and exploring the project.
+                </p>
+
+                <% if(listing){ %>
+                <p class="text-muted">
+                    Listing: <strong><%= listing.title %></strong>
+                </p>
+                <% } %>
+
+                <div class="d-flex gap-3 justify-content-center mt-4">
+                    <a href="/listings" class="btn btn-outline-dark">
+                        Browse Listings
+                    </a>
+
+                    <% if(listing){ %>
+                    <a href="/listings/<%= listing._id %>" class="btn btn-danger">
+                        Back to Listing
+                    </a>
+                    <% } %>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

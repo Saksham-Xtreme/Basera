@@ -92,14 +92,52 @@ module.exports.updateList = async (req, res) => {
             filename: req.file.filename
         };
         await listing.save();
-    }
+    } 
 
     req.flash("updated", "Listing updated");
+
     res.redirect(`/listings/${id}`);
+
 };
+
+
 module.exports.deleteList = async(req, res) => {
     let { id } = req.params;
     req.flash("deleted", "Listing finally Deleted");
     await Listing.findByIdAndDelete(id);
     res.redirect("/listings");
 }
+
+module.exports.getBook = async (req, res) => {
+
+    console.log("get book working");
+
+    const { id } = req.params;
+
+    const listing = await Listing.findById(id);
+
+    if (!listing) {
+        req.flash("error", "Listing not found");
+        return res.redirect("/listings");
+    }
+
+    res.render("lists/book", { listing });
+}
+module.exports.postBook = async (req, res) => {
+
+    const { checkin, checkout, guests } = req.body.booking;
+
+    const listing = await Listing.findById(req.params.id);
+
+    console.log({
+        listing: req.params.id,
+        user: req.user._id,
+        checkin,
+        checkout,
+        guests
+    });
+
+    req.flash("success", "Booking successful!");
+
+    res.render("lists/thanks", { listing });
+};

@@ -1,0 +1,97 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="container my-5">
+
+
+<div class="row justify-content-center">
+    <div class="col-md-8">
+
+        <div class="card shadow-sm border-0 rounded-4">
+
+            <!-- Listing Image -->
+            <img 
+                src="<%= listing.image.url %>" 
+                class="card-img-top rounded-top-4"
+                alt="listing image"
+            >
+
+            <div class="card-body p-4">
+
+                <h3 class="mb-3">Book Your Stay</h3>
+
+                <h5 class="text-muted mb-4">
+                    <%= listing.title %> — <%= listing.location %>
+                </h5>
+
+                <!-- Booking Form -->
+                <form method="POST" action="/listings/<%= listing._id %>/book">
+
+                    <!-- Check-in -->
+                    <div class="mb-3">
+                        <label class="form-label">Check-in Date</label>
+                        <input 
+                            type="date" 
+                            name="booking[checkin]" 
+                            class="form-control"
+                            required
+                        >
+                    </div>
+
+                    <!-- Check-out -->
+                    <div class="mb-3">
+                        <label class="form-label">Check-out Date</label>
+                        <input 
+                            type="date" 
+                            name="booking[checkout]" 
+                            class="form-control"
+                            required
+                        >
+                    </div>
+
+                    <!-- Guests -->
+                    <div class="mb-3">
+                        <label class="form-label">Guests</label>
+                        <input 
+                            type="number" 
+                            name="booking[guests]" 
+                            class="form-control"
+                            min="1"
+                            max="10"
+                            value="1"
+                            required
+                        >
+                    </div>
+
+                    <!-- Price -->
+                    <div class="mb-4">
+                        <strong>
+                            ₹ <%= listing.price.toLocaleString("en-IN") %> / night
+                        </strong>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="d-flex gap-2">
+
+                        <button class="btn btn-success w-100 rounded-pill">
+                            Confirm Booking
+                        </button>
+
+                        <a 
+                            href="/listings/<%= listing._id %>" 
+                            class="btn btn-outline-secondary w-100 rounded-pill"
+                        >
+                            Cancel
+                        </a>
+
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+</div>

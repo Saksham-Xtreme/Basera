@@ -19,12 +19,12 @@
 
                     <div class="listing-owner">
                         <div class="owner-avatar">
-                            <%= listing.owner?.username || "Unknown user" %>
+                            <%= listing.owner?.username?.charAt(0).toUpperCase() || "S" %>
                         </div>
                     
                         <div class="owner-info">
                             <span class="owner-label">Owned by</span>
-                            <span class="owner-name"><%= listing.owner?.username || "Unknown user" %></span>
+                            <span class="owner-name"><%= listing.owner?.username || "Saksham" %></span>
                         </div>
                     </div>
 
@@ -45,32 +45,38 @@
                         </li>
                     </ul>
 
-                    <% if(currentUser && listing.owner && listing.owner._id.equals(currentUser._id)){ %>
-                    <!-- ACTION BUTTONS -->
-                        <div class="d-flex gap-2">
+                    <div class="d-flex gap-2 mt-3">
 
-                            <!-- EDIT -->
+                        <% if(currentUser && listing.owner && listing.owner._id.equals(currentUser._id)){ %>
+                    
+                            <!-- OWNER ACTIONS -->
                             <a 
                                 href="/listings/<%= listing._id %>/edit" 
-                                class="btn btn-outline-secondary w-100"
-                            >
+                                class="btn btn-outline-secondary w-100">
                                 Edit Listing
                             </a>
-
-                            <!-- DELETE -->
+                    
                             <form 
                                 method="POST" 
                                 action="/listings/<%= listing._id %>?_method=DELETE"
-                                class="w-100"
-                            >
+                                class="w-100">
                                 <button class="btn btn-outline-danger w-100">
                                     Delete Listing
                                 </button>
                             </form>
-
-                        </div>
-
-                    <% } %>
+                    
+                        <% } else { %>
+                    
+                            <!-- BOOK NOW BUTTON -->
+                            <a href="/listings/<%= listing._id %>/book" 
+                                class="btn btn-danger btn-lg w-100 fw-semibold rounded-3 shadow-sm mt-3">
+                                Book Now
+                             </a>
+                    
+                        <% } %>
+                    
+                    </div>
+                    
 
                 </div>
             </div>
@@ -159,7 +165,7 @@
                             <div class="review-header">
 
                                 <div class="review-avatar">
-                                    <%= review.author ? review.author.username.charAt(0).toUpperCase() : "G" %>
+                                    <%= review.author?.username?.[0]?.toUpperCase() || "G" %>
                                 </div>
 
                                 <div class="review-user-info">
