@@ -1,6 +1,6 @@
 # Basera : 🔗 https://basera-tijc.onrender.com/
 
-Basera is a full-stack property listing web application inspired by platforms like Airbnb.  
+Basera is a full-stack property listing web application inspired by platforms.
 Users can create property listings, upload images, leave reviews, and manage their listings through a simple and intuitive interface.
 
 The application follows a RESTful architecture with a Model–View–Controller (MVC) design pattern and uses server-side rendering with EJS.
