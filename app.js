@@ -44,7 +44,7 @@ async function main() {
 const sessionOptions = {
     secret : process.env.SESSION_SECRET || "devsecret",
     resave : false,
-    saveUninitialized : true,
+    saveUninitialized : false,
 
     cookie : {
 
